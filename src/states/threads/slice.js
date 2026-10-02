@@ -29,8 +29,7 @@ function toggleVote(list, userId, type) {
       downVotesBy: next.downVotesBy.filter((id) => id !== userId),
     };
   }
-  // return { ...list, ...next };
-  return { ...list };
+  return { ...list, ...next };
 }
 
 const threadsSlice = createSlice({
