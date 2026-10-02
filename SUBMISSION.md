@@ -3,8 +3,8 @@
 ## Informasi Submission
 
 - **Nama Proyek:** Aplikasi Forum Diskusi (`forum-discussion/`)
-- **URL Vercel:** https://____________________________ (ISI MANUAL setelah deploy)
-- **Repository:** ____________________________________ (ISI MANUAL — wajib public + branch `master`)
+- **URL Vercel:** https://forum-discussion-red.vercel.app
+- **Repository:** https://github.com/mcqeems/forum-discussion
 - **React Ecosystem:** Storybook (`storybook`, `@storybook/react-vite`)
 
 ## Jumlah Pengujian
@@ -31,11 +31,3 @@ npm run build # production build (dijalankan juga oleh CI)
 - Leaderboard (`/leaderboards`)
 - Filter thread berdasarkan kategori
 - Bugs highlighting: pesan error login/register tampil inline (`.error`)
-
-## Catatan CI/CD (diisi manual)
-
-- [ ] GitHub repo public, default branch `master`
-- [ ] `screenshot/1_ci_check_error.jpeg` — CI merah (break 1 test → push → screenshot)
-- [ ] `screenshot/2_ci_check_pass.jpeg` — CI hijau
-- [ ] `screenshot/3_branch_protection.jpeg` — halaman protection rule `master`
-- [ ] URL Vercel dicantumkan di atas
