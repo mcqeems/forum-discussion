@@ -1,30 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { api } from '../../utils/api.js';
-import { showLoading, hideLoading } from '../loadingBar/slice.js';
+import { createSlice } from "@reduxjs/toolkit";
+import { api } from "../../utils/api.js";
+import { showLoading, hideLoading } from "../loadingBar/slice.js";
 
 function toggleVote(list, userId, type) {
   const up = list.upVotesBy.includes(userId);
   const down = list.downVotesBy.includes(userId);
-  let next = { upVotesBy: [...list.upVotesBy], downVotesBy: [...list.downVotesBy] };
-  if (type === 'up') {
+  let next = {
+    upVotesBy: [...list.upVotesBy],
+    downVotesBy: [...list.downVotesBy],
+  };
+  if (type === "up") {
     next = up
       ? { ...next, upVotesBy: next.upVotesBy.filter((id) => id !== userId) }
-      : { upVotesBy: [...next.upVotesBy, userId], downVotesBy: next.downVotesBy.filter((id) => id !== userId) };
-  } else if (type === 'down') {
+      : {
+          upVotesBy: [...next.upVotesBy, userId],
+          downVotesBy: next.downVotesBy.filter((id) => id !== userId),
+        };
+  } else if (type === "down") {
     next = down
       ? { ...next, downVotesBy: next.downVotesBy.filter((id) => id !== userId) }
-      : { upVotesBy: next.upVotesBy.filter((id) => id !== userId), downVotesBy: [...next.downVotesBy, userId] };
+      : {
+          upVotesBy: next.upVotesBy.filter((id) => id !== userId),
+          downVotesBy: [...next.downVotesBy, userId],
+        };
   } else {
     next = {
       upVotesBy: next.upVotesBy.filter((id) => id !== userId),
       downVotesBy: next.downVotesBy.filter((id) => id !== userId),
     };
   }
-  return { ...list, ...next };
+  // return { ...list, ...next };
+  return { ...list };
 }
 
 const threadsSlice = createSlice({
-  name: 'threads',
+  name: "threads",
   initialState: [],
   reducers: {
     setThreads: (_state, action) => action.payload,
@@ -73,9 +83,9 @@ export function asyncVoteThread({ threadId, userId, voteType }) {
     const prev = getState().threads;
     dispatch(optimisticVote({ threadId, userId, voteType }));
     try {
-      if (voteType === 'up') {
+      if (voteType === "up") {
         await api.upVoteThread(threadId);
-      } else if (voteType === 'down') {
+      } else if (voteType === "down") {
         await api.downVoteThread(threadId);
       } else {
         await api.neutralizeThread(threadId);
